@@ -1,4 +1,4 @@
-# ClementsComponents
+# Clements Components
 Clement's KiCAD Component Library
 
 ## Included Components
@@ -9,5 +9,5 @@ Clement's KiCAD Component Library
 ### Footprints
 * [XT60-PW-M20](https://www.tme.eu/Document/9b8d0c5eb7094295f3d3112c214d3ade/XT60PW%20SPEC.pdf)
 
-### 3D Model (May not be dimensionally accurate)
+### 3D Models (May not be dimensionally accurate)
 * [XT60-PW-M20](https://www.tme.eu/Document/9b8d0c5eb7094295f3d3112c214d3ade/XT60PW%20SPEC.pdf)
