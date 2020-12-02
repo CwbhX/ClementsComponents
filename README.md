@@ -8,6 +8,10 @@ Clement's KiCAD Component Library
 
 ### Footprints
 * [XT60-PW-M20](https://www.tme.eu/Document/9b8d0c5eb7094295f3d3112c214d3ade/XT60PW%20SPEC.pdf)
+* [DX07S016JA1R1500](https://www.jae.com/direct/topics/topics_file_download/?topics_id=91780&ext_no=04&_lang=en&v=2020041313384666992409)
+* [1267AY-101M=P3](https://www.murata.com/~/media/webrenewal/products/inductor/chip/tokoproducts/wirewoundferritetypeforpl/m_dg8040c.ashx?la=en)
 
 ### 3D Models (May not be dimensionally accurate)
 * [XT60-PW-M20](https://www.tme.eu/Document/9b8d0c5eb7094295f3d3112c214d3ade/XT60PW%20SPEC.pdf)
+* [DX07S016JA1R1500](https://www.jae.com/direct/topics/topics_file_download/?topics_id=91780&ext_no=04&_lang=en&v=2020041313384666992409)
+* [1267AY-101M=P3](https://www.murata.com/~/media/webrenewal/products/inductor/chip/tokoproducts/wirewoundferritetypeforpl/m_dg8040c.ashx?la=en)
