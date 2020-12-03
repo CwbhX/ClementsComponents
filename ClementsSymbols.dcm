@@ -1,3 +1,7 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP PTS815_SJK_250_SMTR_LFS
+F https://www.ckswitches.com/media/2728/pts815.pdf
+$ENDCMP
+#
 #End Doc Library
