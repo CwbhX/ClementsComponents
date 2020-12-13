@@ -9,4 +9,8 @@ D 8 Bit Shift Register
 F https://www.ti.com/lit/ds/symlink/sn74hc595b.pdf?HQS=TI-null-null-digikeymode-df-pf-null-wwe&ts=1607732633037
 $ENDCMP
 #
+$CMP SSM6N7002KFU
+F https://media.digikey.com/pdf/Data%20Sheets/Toshiba%20PDFs/SSM6N7002KFU.pdf
+$ENDCMP
+#
 #End Doc Library
