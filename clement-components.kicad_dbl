@@ -17,8 +17,8 @@
             "name": "Resistors",
             "table": "Resistors",
             "key": "id",
-            "symbols": "Symbols",
-            "footprints": "Footprints",
+            "symbols": "Symbol",
+            "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
@@ -50,8 +50,22 @@
                     "show_name": false
                 },
                 {
+                    "column": "Temperature Co",
+                    "name": "Temperature Co",
+                    "visible_on_add": false,
+                    "visible_in_chooser": true,
+                    "show_name": false
+                },
+                {
                     "column": "Package",
                     "name": "Package",
+                    "visible_on_add": false,
+                    "visible_in_chooser": true,
+                    "show_name": false
+                },
+                {
+                    "column": "Manufacturer",
+                    "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
@@ -65,7 +79,14 @@
                 },
                 {
                     "column": "Distributer PN",
-                    "name": "DPN",
+                    "name": "Distributer PN",
+                    "visible_on_add": false,
+                    "visible_in_chooser": true,
+                    "show_name": false
+                },
+                {
+                    "column": "Price",
+                    "name": "Price",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
