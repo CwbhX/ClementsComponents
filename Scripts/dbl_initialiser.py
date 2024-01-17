@@ -41,16 +41,22 @@ def load_template(excelPath):
 def response_to_bool(response):
     return response.strip().lower() in ['yes', 'y', 'true', 't']
 
-def ask_preferences(name):
+def ask_preferences(libraryName, fieldName):
     questions = [
-        f'Is {name} value visable on adding to the schematic? (y/n)',
-        f'Is {name} visable in the part chooser column? (y/n)',
-        f'Is {name} name visable on adding to the schematic? (y/n)'
+        f'For {libraryName}, is \'{fieldName}\'s value visable on the schematic? (y/n)',
+        f'For {libraryName}, is \'{fieldName}\' visable in the part chooser column? (y/n)',
+        f'For {libraryName}, is \'{fieldName}\'s name also visable on the schematic? (y/n)'
     ]
 
     responses = []
 
     for question in questions:
+        ## If I answered No to the first question, the 3rd question is redudant
+        if responses:
+            if responses[0] == False and len(responses) >= 2:
+                responses.append(False)
+                continue
+                
         response = input(question)
         boolean_response = response_to_bool(response)
         responses.append(boolean_response)
@@ -80,14 +86,15 @@ def generate_library(tableData):
     
     fields = []
     for field in tableData["fields"]:
-        if field in ["id", "Symbol", "Footprint"]:
+        ## Ignore non-field data
+        if field in ["id", "Symbol", "Footprint", "Description", "Footprint Filters", "Keywords", "No BOM", "Schematic Only"]:
             continue
 
         fieldData = {}
         fieldData["column"] = field
-        fieldData["MPN"] = field
+        fieldData["name"] = field
         
-        field_preferences = ask_preferences(field)
+        field_preferences = ask_preferences(tableData["name"], field)
         fieldData["visible_on_add"]     = field_preferences[0]
         fieldData["visible_in_chooser"] = field_preferences[1]
         fieldData["show_name"]          = field_preferences[2]
@@ -95,7 +102,18 @@ def generate_library(tableData):
         fields.append(fieldData)
 
     libraryData["fields"] = fields
-    
+
+    ## Hard coding this because it's not worth the effort right now to not to
+    libraryProperties = {
+        "description": "Description",
+        "footprint_filters": "Footprint Filters",
+        "keywords": "Keywords",
+        "exclude_from_bom": "No BOM",
+        "exclude_from_board": "Schematic Only"
+    }
+
+    libraryData["properties"] = libraryProperties
+
     return libraryData
 
         
