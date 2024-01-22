@@ -5,6 +5,7 @@
 import os
 import sys
 import json
+import copy
 from pathlib import Path
 import pandas as pd
 
@@ -116,8 +117,6 @@ def generate_library(tableData):
 
     return libraryData
 
-        
-
 
 
 def load_initial_dblib():
@@ -134,21 +133,38 @@ def main():
     """Do the thing"""
     # Main script logic
     print(base_dblib_path)
-    dblib_json = load_initial_dblib()
-    template = load_template(excelTemplatePath)
-    parsed_template = parse_tables(template)
+    dblib_json = load_initial_dblib()            ## Load the initial JSON file that we will append to
+    template = load_template(excelTemplatePath)  ## Load the excel file into a Pandas dataframe
+    parsed_tables = parse_tables(template)       ## Returns the tables in a dictionary with the table names being the key
 
     print("Loaded Template")
     print("")
 
-    
-    firstLibName = list(parsed_template.keys())[0]
-    firstLibData = parsed_template[firstLibName]
-    firstLibDict = {"name": firstLibName, "fields": firstLibData}
-    firstLib = generate_library(firstLibDict)
-    print(firstLib)
+    parsed_libraries = []
+    for library in parsed_tables:
+        libName = library
+        libData = parsed_tables[library]
+
+        generatedLib = generate_library({
+            "name": libName,
+            "fields": libData
+        })
+
+        parsed_libraries.append(generatedLib)
+        print("")
+        print("Added Connectors!")
+        print("")
 
 
+    jsonData = copy.deepcopy(dblib_json)
+    jsonData['libraries'].clear() ## Clear the list of libraries, probably dont need this tbh
+    jsonData['libraries'] = parsed_libraries
+
+    finishedFilePath = "config.json"
+
+    with open(finishedFilePath, 'w') as jsonfile:
+        json.dump(jsonData, jsonfile, indent=4)
+        print("Dumped a phat JSON")
 
 
 # Main guard
