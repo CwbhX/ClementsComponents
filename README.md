@@ -1,7 +1,25 @@
 # Clements Components
 Clement's KiCAD Component Library
 
+
+
+## DB Setup
+
+#### Manual CSV Importing
+
+1. Clone this repo
+2. Setup a MySQL DB Library of your choosing
+   1. I personally find this guide from DO pretty useful: [How To Install MySQL on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04)
+3. Install [DBeaver](https://dbeaver.io/) - a tool used to manage DBs with a GUI
+   1. If you're having issues with Java versions (always install the latest directly from Java or Oracle), try [this guide](https://github.com/orgs/dbeaver/discussions/20163) here
+4. Run DBeaver and connect to your newly made MySQL server
+5. Right-click on your kicad database in the explorer a click on **Import Data** then select a table csv and import it
+6. Repeat step 5 for all table csvs in this repo or until you have the tables you require for your project
+
+I hope to have this automated in the future tool
+
 ## Included Components
+
 ### Symbols
 * [CP2102N-A02-GQFN20 (Silicon Labs)](https://www.silabs.com/documents/public/data-sheets/cp2102n-datasheet.pdf)
 * [CP2102N-A02-GQFN24 (Silicon Labs)](https://www.silabs.com/documents/public/data-sheets/cp2102n-datasheet.pdf)
