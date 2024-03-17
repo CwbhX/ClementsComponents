@@ -18,6 +18,37 @@ Clement's KiCAD Component Library
 
 I hope to have this automated in the future tool
 
+## KiCAD DB Lib Setup
+
+### MacOS
+
+1. Download [iODBC](https://www.iodbc.org/dataspace/doc/iodbc/wiki/iodbcWiki/Downloads) and install this *before* trying to install MySQL OBDC Driver
+
+2. Download MySQL OBDC Driver from their [website](https://dev.mysql.com/downloads/connector/odbc/)
+
+   1. Detailed instructions [here](https://dev.mysql.com/doc/connector-odbc/en/connector-odbc-installation-binary-macos.html)
+
+   Okay, ngl it got kinda cursed figuring these next parts out but...
+
+3. Open iODBC Administrator app (should've been installed with the first package)
+
+4. Under User DSN (Don't use System DSN) create a new connection with the Add button
+
+5. Make sure to select the ANSI MySQL Driver - the Unicode driver won't work with KiCAD even though I think it's preventing usage of symbols like µ (annoying)
+
+6. Enter the details of your MySQL DB, it should look something like:
+
+   1. Server | ServerIP
+   2. Database | kicaddb
+   3. User | DB Username
+   4. Password | DB Password
+
+7. Open Kicad 7+ and click on Preferences Pane -> Manage Symbol Libraries...
+
+8. Press the folder icon and select the .kicad_dbl file for your DB Configuration
+
+9. Click OK and if no errors appeared that means it successfully connected to your database!
+
 ## Included Components
 
 ### Symbols
