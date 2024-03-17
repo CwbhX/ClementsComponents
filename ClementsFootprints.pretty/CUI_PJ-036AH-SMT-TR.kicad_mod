@@ -43,7 +43,7 @@
   (pad "1" smd rect (at 0 0 90) (size 3.3 4.4) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 788202ce-6302-42c4-ac24-382fb71ec2fc))
   (pad "2" smd rect (at -8.95 -7.1 180) (size 6.2 3.9) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp bb0066bb-10a5-4b39-96e8-4b7089814b28))
   (pad "3" smd rect (at -8.95 5.8) (size 6.2 3.9) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 495f8206-6418-467d-910c-f61c0f1be834))
-  (model "C:/Users/Clement Hathaway/Github/ClementsComponents/3D Models/CUI_DEVICES_PJ-036AH-SMT-TR.step"
+  (model "${KIPRJMOD}/../ClementsComponents/3D Models/CUI_DEVICES_PJ-036AH-SMT-TR.step"
     (offset (xyz -15.5 0.7 0))
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 90))

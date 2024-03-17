@@ -39,7 +39,7 @@
   (pad "3" thru_hole circle (at 2.4468 5.44955) (size 1.7018 1.7018) (drill 1.1938) (layers *.Cu *.Mask) (tstamp 55fa200d-95ec-4d65-a899-f7baa31e467e))
   (pad "MP" thru_hole circle (at 4.696798 -2.05045) (size 2.5146 2.5146) (drill 2.0066) (layers *.Cu *.Mask) (tstamp d5aedb1d-f5b3-4ba5-8ef5-fc2332bec3ce))
   (pad "MP" thru_hole circle (at -4.803198 -2.05045) (size 2.5146 2.5146) (drill 2.0066) (layers *.Cu *.Mask) (tstamp d76edb10-493b-467b-82ec-a3ab0115e114))
-  (model "C:/Users/Clement Hathaway/Github/ClementsComponents/3D Models/P0915N-EC15BR10K.step"
+  (model "${KIPRJMOD}/../ClementsComponents/3D Models/P0915N-EC15BR10K.step"
     (offset (xyz 0 2 10))
     (scale (xyz 1 1 1))
     (rotate (xyz -90 0 0))
