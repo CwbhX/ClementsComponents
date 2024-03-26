@@ -118,7 +118,7 @@ def generate_library(tableData):
 
     for field in tableData["fields"]:
         ## Ignore non-field data
-        if field in ["id", "Symbol", "Footprint", "Description", "Footprint Filters", "Keywords", "No BOM", "Schematic Only", "Datasheet"]:
+        if field in ["id", "Symbol", "Footprint", "Description", "Footprint Filters", "Keywords", "No BOM", "Schematic Only"]:
             continue
 
         fieldData = {}
@@ -130,7 +130,7 @@ def generate_library(tableData):
             fieldData["visible_in_chooser"] = True
             fieldData["show_name"]          = False
         
-        elif field in ["Distributer PN", "Price"]: ## We never want these on the schematic tbh
+        elif field in ["Distributer PN", "Price", "Datasheet"]: ## We never want these on the schematic tbh
             fieldData["visible_on_add"]     = False
             fieldData["visible_in_chooser"] = False
             fieldData["show_name"]          = False
