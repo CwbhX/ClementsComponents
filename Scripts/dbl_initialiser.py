@@ -111,7 +111,7 @@ def generate_library(tableData):
 
     valueFieldData["visible_on_add"]     = True
     valueFieldData["visible_in_chooser"] = True
-    valueFieldData["show_name"]          = True
+    valueFieldData["show_name"]          = False
 
     fields.append(valueFieldData) ## Add the Value field to the fields first!
 
