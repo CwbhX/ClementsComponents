@@ -1,5 +1,5 @@
 ## Written by GPT-4 don't judge me, I just needed to fix the db error lol
-## Run like: python db_primarykey_fix.py --host YourIP --database YourDatabaseName --user YourUsername --password YourPassword
+## Run like: python db_textlength_fix.py --host YourIP --database YourDatabaseName --user YourUsername --password YourPassword
 
 import argparse
 import mysql.connector
