@@ -46,7 +46,7 @@ def ask_preferences(libraryName, fieldName):
     questions = [
         f'For {libraryName}, is \'{fieldName}\'s value visable on the schematic? (y/n)',
         f'For {libraryName}, is \'{fieldName}\' visable in the part chooser column? (y/n)',
-        f'For {libraryName}, is \'{fieldName}\'s name also visable on the schematic? (y/n)'
+        f'For {libraryName}, is \'{fieldName} also visable on the schematic? (y/n)'
     ]
 
     responses = []
@@ -63,6 +63,23 @@ def ask_preferences(libraryName, fieldName):
         responses.append(boolean_response)
 
     return responses
+
+def ask_value_field(libraryName, libraryFields):
+    question = f'For {libraryName}, enter which library field index should be the part\'s value: '
+    print(f"--------{libraryName} Fields --------")
+    for idx, field in enumerate(libraryFields):
+        print(f"{idx}: {field}")
+    
+    while True:
+        response = input(question)
+        if not response:
+            print("Defaulting to MPN!")
+            return 3 ## AKA the MPN
+        elif response.isdigit() and int(response) > 0:
+            return int(response)
+        else:
+            print(f"{response} is not a valid answer, please enter the index of the {libraryName}\'s value.")
+
 
 def parse_table(table):
     return table.columns.tolist()
@@ -81,28 +98,53 @@ def generate_library(tableData):
     libraryData = {}
     libraryData["name"]       = tableData["name"]
     libraryData["table"]      = tableData["name"]
-    libraryData["key"]        = tableData["fields"][0]
+    libraryData["key"]        = tableData["fields"][3] ## How it indexes in the KiCAD viewer. It should be MPN instead of an incrementing int
     libraryData["symbols"]    = tableData["fields"][1]
-    libraryData["footprints"] = tableData["fields"][2]
+    libraryData["footprints"] = tableData["fields"][2] ## Will need to support multiple footprints at somepoint
     
     fields = []
+
+    ## Define the value field
+    valueFieldData = {}
+    valueFieldData["column"] = tableData["fields"][ask_value_field(tableData["name"], tableData["fields"])] ## Returns the index of the field we want to be the value and then gets that value from the fields dict
+    valueFieldData["name"] = "Value"
+
+    valueFieldData["visible_on_add"]     = True
+    valueFieldData["visible_in_chooser"] = True
+    valueFieldData["show_name"]          = True
+
+    fields.append(valueFieldData) ## Add the Value field to the fields first!
+
+
     for field in tableData["fields"]:
         ## Ignore non-field data
-        if field in ["id", "Symbol", "Footprint", "Description", "Footprint Filters", "Keywords", "No BOM", "Schematic Only"]:
+        if field in ["id", "Symbol", "Footprint", "Description", "Footprint Filters", "Keywords", "No BOM", "Schematic Only", "Datasheet"]:
             continue
 
         fieldData = {}
         fieldData["column"] = field
         fieldData["name"] = field
         
-        field_preferences = ask_preferences(tableData["name"], field)
-        fieldData["visible_on_add"]     = field_preferences[0]
-        fieldData["visible_in_chooser"] = field_preferences[1]
-        fieldData["show_name"]          = field_preferences[2]
+        if field == valueFieldData["column"]: ## Ignore the case where we are asking about the set Value, since we don't want to show it on the schematic twice
+            fieldData["visible_on_add"]     = False
+            fieldData["visible_in_chooser"] = True
+            fieldData["show_name"]          = False
+        
+        elif field in ["Distributer PN", "Price"]: ## We never want these on the schematic tbh
+            fieldData["visible_on_add"]     = False
+            fieldData["visible_in_chooser"] = False
+            fieldData["show_name"]          = False
 
-        fields.append(fieldData)
+        else: ## If the Value field is not MPN, then ask about it OR if we are not asking about MPN field
+            field_preferences = ask_preferences(tableData["name"], field)
+            fieldData["visible_on_add"]     = field_preferences[0]
+            fieldData["visible_in_chooser"] = field_preferences[1]
+            fieldData["show_name"]          = field_preferences[2]
 
-    libraryData["fields"] = fields
+
+        fields.append(fieldData) ## Add all the newly created fields of this library
+
+    libraryData["fields"] = fields ## Add it to the libraryData
 
     ## Hard coding this because it's not worth the effort right now to not to
     libraryProperties = {
@@ -152,7 +194,7 @@ def main():
 
         parsed_libraries.append(generatedLib)
         print("")
-        print("Added Connectors!")
+        print(f'Added {library}!')
         print("")
 
 
@@ -160,7 +202,7 @@ def main():
     jsonData['libraries'].clear() ## Clear the list of libraries, probably dont need this tbh
     jsonData['libraries'] = parsed_libraries
 
-    finishedFilePath = "config.json"
+    finishedFilePath = "config_test.json"
 
     with open(finishedFilePath, 'w') as jsonfile:
         json.dump(jsonData, jsonfile, indent=4)

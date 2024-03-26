@@ -1,6 +1,6 @@
 {
     "meta": {
-        "version": 0
+        "version": 2
     },
     "name": "Clement Database Components",
     "description": "Clement's KiCAD Components",
@@ -16,23 +16,30 @@
         {
             "name": "Connectors",
             "table": "Connectors",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Type",
                     "name": "Type",
-                    "visible_on_add": false,
+                    "visible_on_add": true,
                     "visible_in_chooser": true,
-                    "show_name": false
+                    "show_name": true
                 },
                 {
                     "column": "Gender",
@@ -52,7 +59,7 @@
                     "column": "Pitch",
                     "name": "Pitch",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
@@ -72,7 +79,7 @@
                 {
                     "column": "Current Rating",
                     "name": "Current Rating",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -94,29 +101,22 @@
                     "column": "Temperature Rating",
                     "name": "Temperature Rating",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Package",
                     "name": "Package",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Manufacturer",
                     "name": "Manufacturer",
-                    "visible_on_add": false,
+                    "visible_on_add": true,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
-                    "show_name": false
+                    "show_name": true
                 },
                 {
                     "column": "Distributer PN",
@@ -144,10 +144,17 @@
         {
             "name": "Resistors",
             "table": "Resistors",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
+                {
+                    "column": "Resistance",
+                    "name": "Value",
+                    "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
                 {
                     "column": "MPN",
                     "name": "MPN",
@@ -158,7 +165,7 @@
                 {
                     "column": "Resistance",
                     "name": "Resistance",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -179,8 +186,8 @@
                 {
                     "column": "Temperature Co",
                     "name": "Temperature Co",
-                    "visible_on_add": true,
-                    "visible_in_chooser": true,
+                    "visible_on_add": false,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -193,13 +200,6 @@
                 {
                     "column": "Manufacturer",
                     "name": "Manufacturer",
-                    "visible_on_add": false,
-                    "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
                     "visible_on_add": false,
                     "visible_in_chooser": false,
                     "show_name": false
@@ -230,10 +230,17 @@
         {
             "name": "Capacitors",
             "table": "Capacitors",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
+                {
+                    "column": "Capacitance",
+                    "name": "Value",
+                    "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
                 {
                     "column": "MPN",
                     "name": "MPN",
@@ -244,7 +251,7 @@
                 {
                     "column": "Capacitance",
                     "name": "Capacitance",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -265,7 +272,7 @@
                 {
                     "column": "Dielectric",
                     "name": "Dielectric",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -286,13 +293,6 @@
                 {
                     "column": "Manufacturer",
                     "name": "Manufacturer",
-                    "visible_on_add": false,
-                    "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
                     "visible_on_add": false,
                     "visible_in_chooser": false,
                     "show_name": false
@@ -323,29 +323,36 @@
         {
             "name": "Inductors",
             "table": "Inductors",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
+                    "column": "Inductance",
+                    "name": "Value",
+                    "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
                     "column": "MPN",
                     "name": "MPN",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Inductance",
                     "name": "Inductance",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Tolerance",
                     "name": "Tolerance",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -359,21 +366,21 @@
                     "column": "DCR",
                     "name": "DCR",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "SRF",
                     "name": "SRF",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Saturation Current",
                     "name": "Saturation Current",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -388,13 +395,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -423,14 +423,21 @@
         {
             "name": "Diodes",
             "table": "Diodes",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -444,14 +451,14 @@
                 {
                     "column": "Forward Voltage",
                     "name": "Forward Voltage",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Reverse Voltage",
                     "name": "Reverse Voltage",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -466,21 +473,21 @@
                     "column": "Reverse Recovery Time",
                     "name": "Reverse Recovery Time",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Current Rating",
                     "name": "Current Rating",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Power Dissipation",
                     "name": "Power Dissipation",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -493,13 +500,6 @@
                 {
                     "column": "Manufacturer",
                     "name": "Manufacturer",
-                    "visible_on_add": false,
-                    "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
                     "visible_on_add": false,
                     "visible_in_chooser": false,
                     "show_name": false
@@ -530,10 +530,17 @@
         {
             "name": "LEDs",
             "table": "LEDs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
+                {
+                    "column": "MPN",
+                    "name": "Value",
+                    "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
                 {
                     "column": "MPN",
                     "name": "MPN",
@@ -552,35 +559,35 @@
                     "column": "Wavelength",
                     "name": "Wavelength",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Forward Voltage",
                     "name": "Forward Voltage",
                     "visible_on_add": true,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Forward Current",
                     "name": "Forward Current",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Luminosity",
                     "name": "Luminosity",
-                    "visible_on_add": true,
-                    "visible_in_chooser": true,
+                    "visible_on_add": false,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "CRI",
                     "name": "CRI",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -594,14 +601,14 @@
                     "column": "Power Dissipation",
                     "name": "Power Dissipation",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Package",
                     "name": "Package",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -609,13 +616,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -644,10 +644,17 @@
         {
             "name": "BJTs",
             "table": "BJTs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
+                {
+                    "column": "MPN",
+                    "name": "Value",
+                    "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
                 {
                     "column": "MPN",
                     "name": "MPN",
@@ -666,21 +673,21 @@
                     "column": "Hfe",
                     "name": "Hfe",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vbe",
                     "name": "Vbe",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vce Max",
                     "name": "Vce Max",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -700,7 +707,7 @@
                 {
                     "column": "Power Rating",
                     "name": "Power Rating",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -708,7 +715,7 @@
                     "column": "Tj Max",
                     "name": "Tj Max",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -723,13 +730,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -758,10 +758,17 @@
         {
             "name": "MOSFETs",
             "table": "MOSFETs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
+                {
+                    "column": "MPN",
+                    "name": "Value",
+                    "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
                 {
                     "column": "MPN",
                     "name": "MPN",
@@ -780,7 +787,7 @@
                     "column": "Vgs",
                     "name": "Vgs",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -829,7 +836,7 @@
                     "column": "Tj Max",
                     "name": "Tj Max",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -842,15 +849,8 @@
                 {
                     "column": "Manufacturer",
                     "name": "Manufacturer",
-                    "visible_on_add": true,
-                    "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
@@ -879,14 +879,21 @@
         {
             "name": "IGBTs",
             "table": "IGBTs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -901,14 +908,14 @@
                     "column": "Vge",
                     "name": "Vge",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vce",
                     "name": "Vce",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -922,7 +929,7 @@
                     "column": "Vge Max",
                     "name": "Vge Max",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -950,7 +957,7 @@
                     "column": "Tj Max",
                     "name": "Tj Max",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -965,13 +972,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1000,14 +1000,21 @@
         {
             "name": "Analog ICs",
             "table": "Analog ICs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1015,7 +1022,7 @@
                     "column": "Function",
                     "name": "Function",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
@@ -1029,7 +1036,7 @@
                     "column": "Gain",
                     "name": "Gain",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1043,21 +1050,21 @@
                     "column": "Resolution",
                     "name": "Resolution",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Sampling Rate",
                     "name": "Sampling Rate",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vin Min",
                     "name": "Vin Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1110,13 +1117,6 @@
                     "show_name": false
                 },
                 {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
-                    "show_name": false
-                },
-                {
                     "column": "Distributer PN",
                     "name": "Distributer PN",
                     "visible_on_add": false,
@@ -1142,14 +1142,21 @@
         {
             "name": "Sensor ICs",
             "table": "Sensor ICs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1192,7 +1199,7 @@
                     "column": "Resolution",
                     "name": "Resolution",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
@@ -1206,7 +1213,7 @@
                     "column": "Vin Min",
                     "name": "Vin Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1248,7 +1255,7 @@
                     "column": "Pin Count",
                     "name": "Pin Count",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1256,13 +1263,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1291,14 +1291,21 @@
         {
             "name": "Sensors",
             "table": "Sensors",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1312,23 +1319,23 @@
                 {
                     "column": "Range",
                     "name": "Range",
-                    "visible_on_add": false,
+                    "visible_on_add": true,
                     "visible_in_chooser": true,
-                    "show_name": false
+                    "show_name": true
                 },
                 {
                     "column": "Accuracy",
                     "name": "Accuracy",
-                    "visible_on_add": false,
+                    "visible_on_add": true,
                     "visible_in_chooser": true,
-                    "show_name": false
+                    "show_name": true
                 },
                 {
                     "column": "Sensitivity",
                     "name": "Sensitivity",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
-                    "show_name": false
+                    "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
                 },
                 {
                     "column": "Response Time",
@@ -1341,14 +1348,14 @@
                     "column": "Output",
                     "name": "Output",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Vin Min",
                     "name": "Vin Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1362,7 +1369,7 @@
                     "column": "Operating Current",
                     "name": "Operating Current",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1376,7 +1383,7 @@
                     "column": "Pin Count",
                     "name": "Pin Count",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1384,13 +1391,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1419,14 +1419,21 @@
         {
             "name": "Digital ICs",
             "table": "Digital ICs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1448,7 +1455,7 @@
                     "column": "Vin Min",
                     "name": "Vin Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1462,7 +1469,7 @@
                     "column": "Operating Current",
                     "name": "Operating Current",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1490,7 +1497,7 @@
                     "column": "Pin Count",
                     "name": "Pin Count",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1498,13 +1505,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1533,14 +1533,21 @@
         {
             "name": "PMICs",
             "table": "PMICs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1633,13 +1640,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1668,14 +1668,21 @@
         {
             "name": "Power Drivers",
             "table": "Power Drivers",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1697,14 +1704,14 @@
                     "column": "Frequency",
                     "name": "Frequency",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vin Min",
                     "name": "Vin Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1718,7 +1725,7 @@
                     "column": "Vout Min",
                     "name": "Vout Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1753,7 +1760,7 @@
                     "column": "Package",
                     "name": "Package",
                     "visible_on_add": false,
-                    "visible_in_chooser": false,
+                    "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
@@ -1768,13 +1775,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1803,14 +1803,21 @@
         {
             "name": "Protection ICs",
             "table": "Protection ICs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1818,7 +1825,7 @@
                     "column": "Type",
                     "name": "Type",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1833,14 +1840,14 @@
                     "name": "Trigger Voltage",
                     "visible_on_add": true,
                     "visible_in_chooser": true,
-                    "show_name": false
+                    "show_name": true
                 },
                 {
                     "column": "Clamping Voltage",
                     "name": "Clamping Voltage",
                     "visible_on_add": true,
                     "visible_in_chooser": true,
-                    "show_name": false
+                    "show_name": true
                 },
                 {
                     "column": "Isolation Voltage",
@@ -1853,20 +1860,20 @@
                     "column": "Response Time",
                     "name": "Response Time",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vin Max",
                     "name": "Vin Max",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Power Rating",
                     "name": "Power Rating",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1895,7 +1902,7 @@
                     "column": "Pin Count",
                     "name": "Pin Count",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1903,13 +1910,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -1938,14 +1938,21 @@
         {
             "name": "Communication ICs",
             "table": "Communication ICs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1959,14 +1966,14 @@
                 {
                     "column": "Protocol",
                     "name": "Protocol",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Frequency",
                     "name": "Frequency",
-                    "visible_on_add": true,
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -1974,21 +1981,21 @@
                     "column": "Modulation",
                     "name": "Modulation",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Data Rate",
                     "name": "Data Rate",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vin",
                     "name": "Vin",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2002,7 +2009,7 @@
                     "column": "Operating Current",
                     "name": "Operating Current",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2030,7 +2037,7 @@
                     "column": "Pin Count",
                     "name": "Pin Count",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2038,13 +2045,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2073,14 +2073,21 @@
         {
             "name": "MCUs",
             "table": "MCUs",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -2094,7 +2101,7 @@
                 {
                     "column": "Frequency",
                     "name": "Frequency",
-                    "visible_on_add": false,
+                    "visible_on_add": true,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -2102,28 +2109,28 @@
                     "column": "Peripherals",
                     "name": "Peripherals",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "RAM",
                     "name": "RAM",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "ROM",
                     "name": "ROM",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vin Min",
                     "name": "Vin Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2137,7 +2144,7 @@
                     "column": "Operating Current",
                     "name": "Operating Current",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2165,7 +2172,7 @@
                     "column": "Pin Count",
                     "name": "Pin Count",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2173,13 +2180,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2208,14 +2208,21 @@
         {
             "name": "Clocks and Crystals",
             "table": "Clocks and Crystals",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -2229,14 +2236,14 @@
                 {
                     "column": "Frequency",
                     "name": "Frequency",
-                    "visible_on_add": false,
+                    "visible_on_add": true,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Stability",
                     "name": "Stability",
-                    "visible_on_add": false,
+                    "visible_on_add": true,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
@@ -2244,28 +2251,28 @@
                     "column": "Jitter",
                     "name": "Jitter",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Load Capacitance",
                     "name": "Load Capacitance",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vin Min",
                     "name": "Vin Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
                     "column": "Vin Max",
                     "name": "Vin Max",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2304,13 +2311,6 @@
                     "show_name": false
                 },
                 {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
-                    "show_name": false
-                },
-                {
                     "column": "Distributer PN",
                     "name": "Distributer PN",
                     "visible_on_add": false,
@@ -2336,30 +2336,37 @@
         {
             "name": "Memory",
             "table": "Memory",
-            "key": "id",
+            "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
             "fields": [
                 {
                     "column": "MPN",
-                    "name": "MPN",
+                    "name": "Value",
                     "visible_on_add": true,
+                    "visible_in_chooser": true,
+                    "show_name": true
+                },
+                {
+                    "column": "MPN",
+                    "name": "MPN",
+                    "visible_on_add": false,
                     "visible_in_chooser": true,
                     "show_name": false
                 },
                 {
                     "column": "Memory Type",
                     "name": "Memory Type",
-                    "visible_on_add": false,
+                    "visible_on_add": true,
                     "visible_in_chooser": true,
-                    "show_name": false
+                    "show_name": true
                 },
                 {
                     "column": "Capacity",
                     "name": "Capacity",
                     "visible_on_add": true,
                     "visible_in_chooser": true,
-                    "show_name": false
+                    "show_name": true
                 },
                 {
                     "column": "Interface",
@@ -2393,7 +2400,7 @@
                     "column": "Vin Min",
                     "name": "Vin Min",
                     "visible_on_add": false,
-                    "visible_in_chooser": true,
+                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
@@ -2443,13 +2450,6 @@
                     "name": "Manufacturer",
                     "visible_on_add": false,
                     "visible_in_chooser": true,
-                    "show_name": false
-                },
-                {
-                    "column": "Datasheet",
-                    "name": "Datasheet",
-                    "visible_on_add": false,
-                    "visible_in_chooser": false,
                     "show_name": false
                 },
                 {
