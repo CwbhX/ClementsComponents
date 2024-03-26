@@ -20,6 +20,25 @@ I hope to have this automated in the future tool
 
 ## KiCAD DB Lib Setup
 
+### Windows
+
+1. Download and install the latest MySQL ODBC Connector from their [website](https://dev.mysql.com/downloads/connector/odbc/)
+2. Open *ODBC Data Sources (64-bit)* application
+3. Under *User DSN* tab, click on the "Add" button on the right-hand side
+4. Select *MySQL ODBC 8.3 [or your version] ANSI Driver* and click on "Finish"
+5. Enter the details of your MySQL DB, it should look something like:
+   1. Data Source Name: kicad
+   2. Description: KiCAD Database Library
+   3. TCP/IP Server: MySQL Server IP and Port
+   4. User: MySQL Username
+   5. Password: MySQL Password
+   6. Database: kicaddb
+6. Press OK to finish
+7. Open Kicad 7+ and click on Preferences Pane -> Manage Symbol Libraries...
+8. Press the folder icon and select the .kicad_dbl file for your DB Configuration
+
+9. Click OK and if no errors appeared that means it successfully connected to your database!
+
 ### MacOS
 
 1. Download [iODBC](https://www.iodbc.org/dataspace/doc/iodbc/wiki/iodbcWiki/Downloads) and install this *before* trying to install MySQL OBDC Driver
