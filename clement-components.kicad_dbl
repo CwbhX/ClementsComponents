@@ -1062,7 +1062,7 @@
         },
         {
             "name": "Analog ICs",
-            "table": "Analog ICs",
+            "table": "Analog_ICs",
             "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
@@ -1211,7 +1211,7 @@
         },
         {
             "name": "Sensor ICs",
-            "table": "Sensor ICs",
+            "table": "Sensor_ICs",
             "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
@@ -1502,7 +1502,7 @@
         },
         {
             "name": "Digital ICs",
-            "table": "Digital ICs",
+            "table": "Digital_ICs",
             "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
@@ -1765,7 +1765,7 @@
         },
         {
             "name": "Power Drivers",
-            "table": "Power Drivers",
+            "table": "Power_Drivers",
             "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
@@ -1907,7 +1907,7 @@
         },
         {
             "name": "Protection ICs",
-            "table": "Protection ICs",
+            "table": "Protection_ICs",
             "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
@@ -2049,7 +2049,7 @@
         },
         {
             "name": "Communication ICs",
-            "table": "Communication ICs",
+            "table": "Communication_ICs",
             "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",
@@ -2333,7 +2333,7 @@
         },
         {
             "name": "Clocks and Crystals",
-            "table": "Clocks and Crystals",
+            "table": "Clocks_and_Crystals",
             "key": "MPN",
             "symbols": "Symbol",
             "footprints": "Footprint",

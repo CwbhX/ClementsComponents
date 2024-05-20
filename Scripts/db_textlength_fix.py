@@ -26,13 +26,16 @@ def modify_tables(database_name, user, password, host):
             
             # Loop through all tables and modify the 'Datasheet' and 'Description' columns
             for (table_name,) in tables:
-                for column in ['Datasheet', 'Description']:
+                for column in ['Datasheet', 'Description', 'Footprint', 'Keywords']:
                     try:
                         # Check if the column exists in the table
                         cursor.execute(f"SHOW COLUMNS FROM `{table_name}` LIKE '{column}';")
                         result = cursor.fetchone()
                         if result:
-                            alter_query = f"ALTER TABLE `{table_name}` MODIFY COLUMN `{column}` TEXT;"
+                            if column == 'Footprint':
+                                alter_query = f"ALTER TABLE `{table_name}` MODIFY COLUMN `{column}` VARCHAR(255);"
+                            else:
+                                alter_query = f"ALTER TABLE `{table_name}` MODIFY COLUMN `{column}` TEXT;"
                             cursor.execute(alter_query)
                             connection.commit()
                             print(f"Column {column} in table {table_name} modified successfully.")
