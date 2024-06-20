@@ -1,0 +1,140 @@
+(footprint "PhotoDiode-0805"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0.381 -2.032 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "c58bb885-bd4b-4130-a040-927a451b39e9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "PhotoDiode-0805"
+		(at 0 -5.842 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "521f8f1e-bc4c-4794-b9cd-f2600f3bcc3e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 -6.842 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2dd7e510-5754-45b3-9602-a934ef6098fa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 -6.842 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c5bc6796-f28d-496b-aa4e-0a2720405e21")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 -6.842 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "35cba451-e67d-4561-9c23-6a5c23d0a461")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -1.524 -1.016)
+		(end -1.27 -1.016)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "ab137460-28ea-44ac-b9ff-dd2d6b279b9d")
+	)
+	(fp_line
+		(start -1.524 -0.762)
+		(end -1.524 -1.016)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "53f71ee5-6e9f-44aa-8c13-89b04b20da0b")
+	)
+	(fp_rect
+		(start -1.397 -0.889)
+		(end 1.397 0.889)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill none)
+		(layer "F.CrtYd")
+		(uuid "d7179c9f-c4e7-4139-b144-7d52306c59bf")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 -4.342 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "080a2d99-a40f-403d-b175-15d347d65136")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at -0.8 0)
+		(size 1 1.45)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(roundrect_rratio 0.1)
+		(thermal_bridge_angle 45)
+		(uuid "9c6497d2-5394-43ee-a64d-8e67dfa5e2d5")
+	)
+	(pad "2" smd roundrect
+		(at 0.8 0)
+		(size 1 1.45)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(roundrect_rratio 0.1)
+		(thermal_bridge_angle 45)
+		(uuid "4e133ce7-e401-4209-ad4f-eb18bc7a9eb6")
+	)
+	(model "C:/Users/Clement Hathaway/GitHub/ClementsComponents/3D Models/DIODE_TEMD6200.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
