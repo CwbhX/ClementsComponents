@@ -40,24 +40,19 @@ def infer_sql_dtype(value):
 # Use the first valid data row to infer the data types if the DataFrame is not empty
 if not df.empty:
     first_valid_row = df.iloc[0]
-    column_defs = ", ".join([f"`{col}` {infer_sql_dtype(first_valid_row[col])}" for col in df.columns])
+    column_defs = ", ".join([f"`{col}` {infer_sql_dtype(first_valid_row[col])}" for col in df.columns if col != 'id'])
 else:
-    column_defs = ", ".join([f"`{col}` TEXT" for col in df.columns])  # Default to TEXT if no data rows
+    column_defs = ", ".join([f"`{col}` TEXT" for col in df.columns if col != 'id'])  # Default to TEXT if no data rows
+
 
 # Create the table creation query based on whether 'id' column exists
-if 'id' in df.columns:
-    create_table_query = f"""
-    CREATE TABLE IF NOT EXISTS `{table_name}` (
-        {column_defs}
-    );
-    """
-else:
-    create_table_query = f"""
-    CREATE TABLE IF NOT EXISTS `{table_name}` (
-        `id` INT PRIMARY KEY AUTO_INCREMENT,
-        {column_defs}
-    );
-    """
+
+create_table_query = f"""
+CREATE TABLE IF NOT EXISTS `{table_name}` (
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    {column_defs}
+);
+"""
 
 # Log the SQL query
 print(f"Executing SQL query: {create_table_query}")
@@ -87,4 +82,5 @@ finally:
         cursor.close()
         connection.close()
         print("MySQL connection is closed")
+
 
