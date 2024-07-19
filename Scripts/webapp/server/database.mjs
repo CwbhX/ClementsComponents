@@ -7,6 +7,7 @@ export class Database {
 
     async query(sql, params = []){
         const [rows] = await this.pool.execute(sql, params)
+        console.log("Query: ", sql, params);
         return rows
     }
 
@@ -35,6 +36,51 @@ export class Database {
         }
     }
 
+    async getTableData(tableName){
+        const sanitizedTableName = mysql.escapeId(tableName);
+        // console.log(sanitizedTableName);
+        const query = `SELECT * FROM ${sanitizedTableName}`;
+        
+        try {
+            const rows = await this.query(query);
+            return rows;
 
+        } catch (error) {
+            console.error(`Failed to fetch data from table ${tableName}`, error);
+            return false;
+        }    
+    }
+
+    async getRowData(tableName, index){
+        if (index < 1) {
+            index = 1;
+        }
+
+        const sanitizedTableName = mysql.escapeId(tableName);
+        const query = `SELECT * FROM ${sanitizedTableName} WHERE id = ? LIMIT 1`;
+        console.log("Row Data Q: ", query);
+
+        try {
+            const rows = await this.query(query, [index]);
+            return rows.length > 0 ? rows[0] : null; // Ensure only one row or null is returned
+
+        } catch (error) {
+            console.error(`Failed to fetch data from table ${tableName}`, error);
+            return false;
+        }
+    }
+
+    async getColumnNames(tableName) {
+        const sanitizedTableName = mysql.escapeId(tableName);
+        const query = `SHOW COLUMNS FROM ${sanitizedTableName}`;
+        try {
+            const rows = await this.query(query);
+            const columnNames = rows.map(row => row.Field);
+            return columnNames;
+        } catch (error) {
+            console.error(`Failed to fetch column names from table ${tableName}:`, error);
+            return false;
+        }
+    }
 
 }

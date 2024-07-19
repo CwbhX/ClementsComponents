@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.mjs",
     "server": "nodemon --watch server server/server.mjs",
-    "client": "cd client && npm run dev",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client": "cd client && pnpm run dev",
+    "build": "cd client && pnpm run build",
+    "dev": "concurrently \"pnpm run server\" \"pnpm run client\""
   },
   "keywords": [],
   "author": "",
