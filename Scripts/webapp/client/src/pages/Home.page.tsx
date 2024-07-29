@@ -1,52 +1,42 @@
-import { Welcome } from '../components/Welcome/Welcome';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
-import { Table } from '@mantine/core';
-import { io } from 'socket.io-client';
-
-const elements = [
-  { position: 6, mass: 12.011, symbol: 'C', name: 'Carbon' },
-  { position: 7, mass: 14.007, symbol: 'N', name: 'Nitrogen' },
-  { position: 39, mass: 88.906, symbol: 'Y', name: 'Yttrium' },
-  { position: 56, mass: 137.33, symbol: 'Ba', name: 'Barium' },
-  { position: 58, mass: 140.12, symbol: 'Ce', name: 'Cerium' },
-];
-
-// Connect to the Socket.IO server
-const socket = io('https://localhost:3000', {
-  secure: true,
-  rejectUnauthorized: false // Allow self-signed certificates for local development
-});
-
-socket.on('connect', () => {
-  console.log('Connected to server');
-});
+import React, { useState } from 'react';
+import { AppShell, Burger, Group, Skeleton, Title } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { SQLTable } from '../components/SQLTable/SQLTable';
+import { SQLTables } from '@/components/SQLTables/SQLTables';
 
 
 export function HomePage() {
-  const rows = elements.map((element) => (
-    <Table.Tr key={element.name}>
-      <Table.Td>{element.position}</Table.Td>
-      <Table.Td>{element.name}</Table.Td>
-      <Table.Td>{element.symbol}</Table.Td>
-      <Table.Td>{element.mass}</Table.Td>
-    </Table.Tr>
-  ));
+    const [opened, { toggle }] = useDisclosure();
+    const [selectedTable, setSelectedTable] = useState<string>("");
+    // let selectedTable:string = ""; // Why doesn't this work?
 
-  return (
-    <>
-      <Welcome />
-      <ColorSchemeToggle />
-      <Table>
-      <Table.Thead>
-        <Table.Tr>
-          <Table.Th>Element position</Table.Th>
-          <Table.Th>Element name</Table.Th>
-          <Table.Th>Symbol</Table.Th>
-          <Table.Th>Atomic mass</Table.Th>
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
-    </Table>
-    </>
-  );
+
+    const handleTableSelect = (tableName: string) => {
+        // selectedTable = tableName;
+        setSelectedTable(tableName);
+        console.log(`Selected Table: ${selectedTable}`);
+    };
+
+    // Main JSX
+    return (
+      <AppShell
+        header={{ height: 60 }}
+        footer={{ height: 60 }}
+        navbar={{ width: 300, breakpoint: 'sm', collapsed: { mobile: !opened } }}
+        aside={{ width: 300, breakpoint: 'md', collapsed: { desktop: false, mobile: true } }}
+        padding="md"
+      >
+        <AppShell.Header>
+          <Title>ClementsComponents</Title>
+        </AppShell.Header>
+        <AppShell.Navbar p="md">
+          <SQLTables onTableSelect={handleTableSelect}></SQLTables>
+        </AppShell.Navbar>
+        <AppShell.Main>
+            <SQLTable selectedTable={selectedTable}></SQLTable>
+        </AppShell.Main>
+        <AppShell.Aside p="md">Aside</AppShell.Aside>
+        <AppShell.Footer p="md">Footer</AppShell.Footer>
+      </AppShell>
+    );
 }

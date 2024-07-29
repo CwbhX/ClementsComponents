@@ -49,7 +49,7 @@ const server = https.createServer(options, app);
 // Initialize socket.io with the HTTPS server
 const sio = new Server(server, {
   cors: {
-    origin: ['https://localhost:3000', 'https://127.0.0.1:3000'],
+    origin: ['https://localhost:3000', 'https://127.0.0.1:3000', 'https://127.0.0.1:5173', 'https://localhost:5173'],
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -123,10 +123,26 @@ mainass();
 
 sio.on('connection', (socket) => {
   console.log('A user connected');
+
+  socket.on('getTables', async (callback) => {
+      console.log("Request for sql tables");
+      const tables = await listDatabaseTables();
+
+      callback(tables);
+  });
+
+  socket.on('getTableData', async (tableName, callback) => {
+      console.log(`Request for ${tableName}`);
+      const tableData = await listTableData(tableName);
+
+      callback(tableData);
+  });
+
   socket.on('disconnect', () => {
     console.log('User disconnected');
   });
 });
+
 
 
 // Define a route for "/"
