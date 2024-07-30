@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableData } from '@mantine/core';
+import { Table, TableData, Button, Modal, Divider, Title, Group } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { useSocket } from '../../contexts/SocketContext';
 
 interface SQLTableProps {
@@ -30,6 +31,7 @@ function parseTableData(tableName:string, rawTableData:Record<string, any>[]):Ta
 export function SQLTable({ selectedTable }:SQLTableProps) {
     const {socket, isConnected} = useSocket();
     const [tableData, setTableData] = useState<TableData>();
+    const [opened, { open, close }] = useDisclosure(false);
 
     useEffect(() => {
         if (isConnected && selectedTable.length !== 0){
@@ -46,6 +48,21 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
     
 
     return (
-      <Table highlightOnHover data={tableData}/>
+        <>
+            <Group justify='space-between'>
+                <Title order={1}>{selectedTable}</Title>
+                <Group justify='center'>
+                    <Button>Edit Table</Button>
+                    <Button onClick={open}>Add Part</Button>
+                </Group>
+            </Group>
+            <Divider my="sm" />
+            <Table.ScrollContainer minWidth={500}>
+                <Table highlightOnHover withColumnBorders data={tableData}/>
+            </Table.ScrollContainer>
+            <Modal opened={opened} onClose={close} title="Add Part">
+                {/* Modal content */}
+            </Modal>
+        </>
     );
 }

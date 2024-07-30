@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC } from "react";
-import { Table } from '@mantine/core';
+import { Table, Title, Divider } from '@mantine/core';
 import { useSocket } from "@/contexts/SocketContext";
 
 interface SQLTablesProps {
@@ -20,17 +20,17 @@ export function SQLTables({ onTableSelect }:SQLTablesProps){
     
     // Display DB Table names and pass selectedname up to parent component
     return (
-        <Table highlightOnHover>
-            <Table.Thead>
-                <Table.Th>Component Tables</Table.Th>
-            </Table.Thead>
-            <Table.Tbody>
-                {tables.map((tableName) => (
-                    <Table.Tr key={tableName} onClick={() => onTableSelect(tableName)}>
-                        <Table.Td>{tableName}</Table.Td>
-                    </Table.Tr>
-                ))}
-            </Table.Tbody>
-        </Table>
+        <>
+            <Title order={3}>Tables</Title>
+            <Table highlightOnHover>
+                <Table.Tbody>
+                    {tables.map((tableName) => (
+                        <Table.Tr key={tableName} onClick={() => onTableSelect(tableName)}>
+                            <Table.Td>{tableName}</Table.Td>
+                        </Table.Tr>
+                    ))}
+                </Table.Tbody>
+            </Table>
+        </>
     );
 }
