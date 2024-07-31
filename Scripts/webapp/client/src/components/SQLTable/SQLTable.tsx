@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableData, Button, Modal, Divider, Title, Group } from '@mantine/core';
+import { Table, TableData, Button, Modal, Divider, Title, Group, Switch } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useSocket } from '../../contexts/SocketContext';
 
@@ -52,6 +52,9 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
             <Group justify='space-between'>
                 <Title order={1}>{selectedTable}</Title>
                 <Group justify='center'>
+                    <Switch
+                    label="Edit Mode"
+                    />
                     <Button>Edit Table</Button>
                     <Button onClick={open}>Add Part</Button>
                 </Group>
