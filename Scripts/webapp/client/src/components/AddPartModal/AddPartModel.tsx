@@ -8,8 +8,28 @@ interface AddPartModalProps {
     partIndex: number;
 }
 
+function textInputConditional(field:string, suggestedID:number):React.ReactElement{
+    if(field === "id"){
+        return(        
+            <TextInput
+            disabled
+            label={"Part #"}
+            placeholder={suggestedID.toString()}
+            />
+        )
+    } else {
+        return(
+            <TextInput
+            label={field}
+            placeholder={field}
+            />
+        )
+    }
+}
+
 
 export function AddPartModal( {modalState, modalClose, modalFields, partIndex}:AddPartModalProps ) {
+    console.log("fields: ", modalFields);
     
 
     return (
@@ -22,19 +42,17 @@ export function AddPartModal( {modalState, modalClose, modalFields, partIndex}:A
                 blur: 3,
                 }}>
         
-            {modalFields.map((tableField) => (
-                <Stack>
-                    <TextInput
-                    label={tableField}
-                    placeholder={tableField}
-                    />
-                </Stack>
-            ))}
+            <Stack>
+                {modalFields.map((tableField) => (
+                    <Stack key={tableField}>
+                        {textInputConditional(tableField, partIndex)}
+                    </Stack>
+                ))}
 
-            <Group justify="flex-end">
-                <Button variant="filled">Save</Button>;
-            </Group>
-        
+                <Group justify="flex-end">
+                    <Button variant="filled">Save</Button>
+                </Group>
+            </Stack>
         </Modal>
     );
 }

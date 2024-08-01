@@ -34,7 +34,8 @@ const options = {
 
 // Use CORS middleware to allow requests from localhost:3000
 app.use(cors({
-  origin: ['https://localhost:3000', 'https://127.0.0.1:3000'],
+  origin: ['https://localhost:3000', 'https://127.0.0.1:3000', 'https://localhost:5173', 'https://127.0.0.1:5173',
+           'http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5173', 'http://127.0.0.1:5173'],
   methods: ['GET', 'POST'],
   credentials: true
 }));
@@ -49,7 +50,8 @@ const server = https.createServer(options, app);
 // Initialize socket.io with the HTTPS server
 const sio = new Server(server, {
   cors: {
-    origin: ['https://localhost:3000', 'https://127.0.0.1:3000', 'https://127.0.0.1:5173', 'https://localhost:5173'],
+    origin: ['https://localhost:3000', 'https://127.0.0.1:3000', 'https://localhost:5173', 'https://127.0.0.1:5173',
+             'http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5173', 'http://127.0.0.1:5173'],
     methods: ["GET", "POST"],
     credentials: true
   }

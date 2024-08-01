@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Table, TableData, Button, Modal, Divider, Title, Group, Switch } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useSocket } from '../../contexts/SocketContext';
+import { AddPartModal } from '../AddPartModal/AddPartModel';
 
 interface SQLTableProps {
     selectedTable: string
@@ -24,13 +25,25 @@ function parseTableData(tableName:string, rawTableData:Record<string, any>[]):Ta
     }
 
     return parsedTableData;
+}
 
+function getTableColumns(rawTableData:Record<string, any>[]):string[]{
+    let columns = [""];
+
+    if (rawTableData.length > 0) {
+        const firstRow = rawTableData[0];
+        columns = Object.keys(firstRow);
+    }
+
+    return columns;
 }
 
 
 export function SQLTable({ selectedTable }:SQLTableProps) {
     const {socket, isConnected} = useSocket();
     const [tableData, setTableData] = useState<TableData>();
+    const [tableColumns, setTableColumns] = useState<string[]>([""]);
+
     const [opened, { open, close }] = useDisclosure(false);
 
     useEffect(() => {
@@ -38,9 +51,9 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
             socket.emit("getTableData", selectedTable, (tableDataResponse: Record<string, any>[]) => {
                 // Work on returned data
                 const parsedTableData = parseTableData(selectedTable, tableDataResponse);
+                setTableColumns(getTableColumns(tableDataResponse));
                 setTableData(parsedTableData);
-              
-                // setTableData();
+                
             });
         }
     
@@ -63,9 +76,13 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
             <Table.ScrollContainer minWidth={500}>
                 <Table highlightOnHover withColumnBorders data={tableData}/>
             </Table.ScrollContainer>
-            <Modal opened={opened} onClose={close} title="Add Part">
-                {/* Modal content */}
-            </Modal>
+
+            <AddPartModal 
+                modalState={opened} 
+                modalClose={close}
+                modalFields={tableColumns}
+                partIndex={69}
+                />
         </>
     );
 }
