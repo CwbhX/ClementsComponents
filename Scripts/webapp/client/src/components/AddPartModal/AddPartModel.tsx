@@ -8,7 +8,9 @@ interface AddPartModalProps {
     partIndex: number;
 }
 
-function textInputConditional(field:string, suggestedID:number):React.ReactElement{
+type InputChangeHandler = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => void;
+
+function textInputCon(field:string, valueState:string, onChangeHandler:InputChangeHandler, suggestedID:number):React.ReactElement{
     if(field === "id"){
         return(        
             <TextInput
@@ -22,6 +24,8 @@ function textInputConditional(field:string, suggestedID:number):React.ReactEleme
             <TextInput
             label={field}
             placeholder={field}
+            value={valueState}
+            onChange={onChangeHandler(field)}
             />
         )
     }
@@ -30,7 +34,26 @@ function textInputConditional(field:string, suggestedID:number):React.ReactEleme
 
 export function AddPartModal( {modalState, modalClose, modalFields, partIndex}:AddPartModalProps ) {
     console.log("fields: ", modalFields);
-    
+    // Create a state for tracking field inputs, initialise with reduce to a dict with "" as default values
+    const [inputValues, setInputValues] = useState<Record<string, string>>(
+        modalFields.reduce((acc, field) => {
+            acc[field] = "";
+            return acc;
+        }, {} as Record<string, string>)
+    );
+
+    const handleInputChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValues((previousValues) => ({
+            ...previousValues,
+            [fieldName]: event.target.value
+        }));
+    };
+
+      // Handle save button click
+    const handleSave = () => {
+        console.log("Input Values: ", inputValues);
+        // Additional processing can be done here
+    };
 
     return (
         <Modal opened={modalState}
@@ -45,12 +68,12 @@ export function AddPartModal( {modalState, modalClose, modalFields, partIndex}:A
             <Stack>
                 {modalFields.map((tableField) => (
                     <Stack key={tableField}>
-                        {textInputConditional(tableField, partIndex)}
+                        {textInputCon(tableField, inputValues[tableField], handleInputChange, partIndex)}
                     </Stack>
                 ))}
 
                 <Group justify="flex-end">
-                    <Button variant="filled">Save</Button>
+                    <Button variant="filled" onClick={handleSave}>Save</Button>
                 </Group>
             </Stack>
         </Modal>
