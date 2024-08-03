@@ -17,6 +17,7 @@ function textInputCon(field:string, valueState:string, onChangeHandler:InputChan
             disabled
             label={"Part #"}
             placeholder={suggestedID.toString()}
+            value={suggestedID.toString()}
             />
         )
     } else {
@@ -33,14 +34,36 @@ function textInputCon(field:string, valueState:string, onChangeHandler:InputChan
 
 
 export function AddPartModal( {modalState, modalClose, modalFields, partIndex}:AddPartModalProps ) {
-    console.log("fields: ", modalFields);
+    // console.log("fields: ", modalFields);
     // Create a state for tracking field inputs, initialise with reduce to a dict with "" as default values
-    const [inputValues, setInputValues] = useState<Record<string, string>>(
-        modalFields.reduce((acc, field) => {
-            acc[field] = "";
-            return acc;
-        }, {} as Record<string, string>)
-    );
+    // const [inputValues, setInputValues] = useState<Record<string, string>>(
+    //     modalFields.reduce((acc, field) => {
+    //         acc[field] = "";
+    //         return acc;
+    //     }, {} as Record<string, string>)
+    // );
+
+    // console.log("Modal Fields: ", inputValues);
+    
+
+    const [inputValues, setInputValues] = useState<Record<string, string>>({});
+    let fieldsSetup = false;
+
+    useEffect(() => {
+        if (modalFields.length > 0 && fieldsSetup == false){
+            const initialFieldValues = modalFields.reduce((acc, field) => {
+                acc[field] = "";
+                return acc;
+            }, {} as Record<string, string>);
+
+            setInputValues(initialFieldValues);
+            fieldsSetup = true;
+            console.log("Setup initial values");
+        }
+    }, [modalFields]);
+
+    console.log("State values: ", inputValues);
+    
 
     const handleInputChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValues((previousValues) => ({
