@@ -108,7 +108,7 @@ async function insertRow(tableName, rowData){
         console.log("Affected Row ID: ", affectedRowID);
         return affectedRowID;
     } catch (error) {
-        console.error("Error inserting row");
+        console.error("Error inserting row", error);
     }
 }
 
@@ -143,10 +143,11 @@ sio.on('connection', (socket) => {
       callback(tableData);
   });
 
-  socket.on('insertRow', async (tableName, rowData) => {
+  socket.on('insertRow', async ({tableName, rowData}, callback) => {
+      const newRowData = {...rowData, "id":4}
       console.log(`Inserting row into ${tableName}`);
 
-      const rowID = await insertRow(tableName, rowData);
+      const rowID = await insertRow(tableName, newRowData);
 
       callback(rowID);
   })
