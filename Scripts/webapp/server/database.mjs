@@ -83,4 +83,23 @@ export class Database {
         }
     }
 
+    async insertRow(tableName, rowData){
+        const sanitizedTableName = mysql.escapeId(tableName);
+
+        const columns = Object.keys(rowData).map(col => mysql.escapeId(col)).join(', '); // Get the columns from the data
+        const dataPlaceholders = Object.keys(rowData).map(() => "?").join(', ');         // Make the placeholders to insert the data with the mysql module
+        const dataValues = Object.values(rowData);
+
+        const query = `INSERT INTO ${sanitizedTableName} (${columns}) VALUES (${dataPlaceholders})`;
+
+        try {
+            const result = await this.query(query, dataValues);
+            console.log(`Inserted ${result.affectedRows} row(s) into ${tableName}`);
+            return result.insertId;
+        } catch (error) {
+            console.error(`Failed to add row to table ${tableName}:`, error);
+            return false;
+        }
+    }
+
 }

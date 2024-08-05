@@ -18,14 +18,6 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// const options = {
-//   key: fs.readFileSync(process.env.KEY_PATH).toString(),
-//   cert: fs.readFileSync(process.env.CERT_PATH).toString(),
-//   ciphers: 'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES256-SHA384',
-//   honorCipherOrder: true,
-//   secureProtocol: 'TLSv1_2_method'
-// };
-
 const options = {
   key: fs.readFileSync(process.env.KEY_PATH).toString(),
   cert: fs.readFileSync(process.env.CERT_PATH).toString()
@@ -110,17 +102,28 @@ async function listFirstRowData(tableName, index){
     }
 }
 
-async function mainass() {
-  const tables = await listDatabaseTables();
-  console.log(tables);
-  const firstTableData = await listTableData(tables[0]);
-  const firstTableColumsn = await listTableColumns(tables[0]);
-  const firstRowData = await listFirstRowData(tables[0], 1);
-  // const secondTableData = await listTableData(tables[1]);
+async function insertRow(tableName, rowData){
+    try {
+        const affectedRowID = await db.insertRow(tableName, rowData);
+        console.log("Affected Row ID: ", affectedRowID);
+        return affectedRowID;
+    } catch (error) {
+        console.error("Error inserting row");
+    }
 }
 
+// async function mainass() {
+//   const tables = await listDatabaseTables();
+//   console.log(tables);
+//   const firstTableData = await listTableData(tables[0]);
+//   const firstTableColumsn = await listTableColumns(tables[0]);
+//   const firstRowData = await listFirstRowData(tables[0], 1);
+//   // const secondTableData = await listTableData(tables[1]);
+// }
 
-mainass();
+
+
+// mainass();
 
 
 sio.on('connection', (socket) => {
@@ -139,6 +142,14 @@ sio.on('connection', (socket) => {
 
       callback(tableData);
   });
+
+  socket.on('insertRow', async (tableName, rowData) => {
+      console.log(`Inserting row into ${tableName}`);
+
+      const rowID = await insertRow(tableName, rowData);
+
+      callback(rowID);
+  })
 
   socket.on('disconnect', () => {
     console.log('User disconnected');

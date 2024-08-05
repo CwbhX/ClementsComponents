@@ -78,6 +78,7 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
             </Table.ScrollContainer>
 
             <AddPartModal 
+                tableName={selectedTable}
                 modalState={opened} 
                 modalClose={close}
                 modalFields={tableColumns}

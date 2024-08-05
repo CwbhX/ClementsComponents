@@ -1,7 +1,9 @@
 import React, { useEffect, useState, FC } from "react";
 import { Modal, Stack, Group, Text, TextInput, Button } from '@mantine/core';
+import { useSocket } from "@/contexts/SocketContext";
 
 interface AddPartModalProps {
+    tableName: string;
     modalState: boolean;
     modalClose: () => void;
     modalFields: string[];
@@ -33,21 +35,12 @@ function textInputCon(field:string, valueState:string, onChangeHandler:InputChan
 }
 
 
-export function AddPartModal( {modalState, modalClose, modalFields, partIndex}:AddPartModalProps ) {
-    // console.log("fields: ", modalFields);
-    // Create a state for tracking field inputs, initialise with reduce to a dict with "" as default values
-    // const [inputValues, setInputValues] = useState<Record<string, string>>(
-    //     modalFields.reduce((acc, field) => {
-    //         acc[field] = "";
-    //         return acc;
-    //     }, {} as Record<string, string>)
-    // );
-
-    // console.log("Modal Fields: ", inputValues);
-    
+export function AddPartModal( {tableName, modalState, modalClose, modalFields, partIndex}:AddPartModalProps ) {
+    const {socket, isConnected} = useSocket(); // Reference socket provider for socket.io
 
     const [inputValues, setInputValues] = useState<Record<string, string>>({});
-    let fieldsSetup = false;
+
+    let fieldsSetup = false; // Initial state to false to let us update the fields once once SQL returns data
 
     useEffect(() => {
         if (modalFields.length > 0 && fieldsSetup == false){
@@ -61,10 +54,8 @@ export function AddPartModal( {modalState, modalClose, modalFields, partIndex}:A
             console.log("Setup initial values");
         }
     }, [modalFields]);
-
-    console.log("State values: ", inputValues);
     
-
+    // Higher level function for each field's event handler
     const handleInputChange = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValues((previousValues) => ({
             ...previousValues,
@@ -75,7 +66,12 @@ export function AddPartModal( {modalState, modalClose, modalFields, partIndex}:A
       // Handle save button click
     const handleSave = () => {
         console.log("Input Values: ", inputValues);
-        // Additional processing can be done here
+        
+        if (isConnected){
+            socket.emit('insertRow', {tableName, inputValues}, (affectedRow:number) => {
+                console.log("Successful added row: ", affectedRow);
+            });
+        }
     };
 
     return (
