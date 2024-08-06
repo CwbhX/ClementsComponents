@@ -43,21 +43,22 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
     const {socket, isConnected} = useSocket();
     const [tableData, setTableData] = useState<TableData>();
     const [tableColumns, setTableColumns] = useState<string[]>([""]);
+    const [fetchUpdate, setFetchUpdate] = useState<boolean>(true);
 
     const [opened, { open, close }] = useDisclosure(false);
 
     useEffect(() => {
-        if (isConnected && selectedTable.length !== 0){
+        if (isConnected && selectedTable.length !== 0 && fetchUpdate == true){
             socket.emit("getTableData", selectedTable, (tableDataResponse: Record<string, any>[]) => {
                 // Work on returned data
                 const parsedTableData = parseTableData(selectedTable, tableDataResponse);
                 setTableColumns(getTableColumns(tableDataResponse));
                 setTableData(parsedTableData);
-                
+                setFetchUpdate(false);
             });
         }
     
-    }, [selectedTable]);
+    }, [selectedTable, fetchUpdate]);
     
 
     return (
@@ -83,6 +84,7 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
                 modalClose={close}
                 modalFields={tableColumns}
                 partIndex={69}
+                setFetchUpdate={setFetchUpdate}
                 />
         </>
     );

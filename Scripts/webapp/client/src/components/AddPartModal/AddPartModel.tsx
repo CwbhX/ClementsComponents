@@ -8,6 +8,7 @@ interface AddPartModalProps {
     modalClose: () => void;
     modalFields: string[];
     partIndex: number;
+    setFetchUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type InputChangeHandler = (fieldName: string) => (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -35,7 +36,7 @@ function textInputCon(field:string, valueState:string, onChangeHandler:InputChan
 }
 
 
-export function AddPartModal( {tableName, modalState, modalClose, modalFields, partIndex}:AddPartModalProps ) {
+export function AddPartModal( {tableName, modalState, modalClose, modalFields, partIndex, setFetchUpdate}:AddPartModalProps ) {
     const {socket, isConnected} = useSocket(); // Reference socket provider for socket.io
 
     const [inputValues, setInputValues] = useState<Record<string, string>>({});
@@ -68,8 +69,12 @@ export function AddPartModal( {tableName, modalState, modalClose, modalFields, p
         console.log("Input Values: ", inputValues);
         
         if (isConnected){
-            socket.emit('insertRow', {tableName, inputValues}, (affectedRow:number) => {
+            socket.emit('insertRow', {tableName:tableName, rowData:inputValues}, (affectedRow:number) => {
                 console.log("Successful added row: ", affectedRow);
+                if(affectedRow != null){
+                    modalClose();
+                    setFetchUpdate(true);
+                }
             });
         }
     };
