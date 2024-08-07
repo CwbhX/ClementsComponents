@@ -5,7 +5,9 @@ import { useSocket } from '../../contexts/SocketContext';
 import { AddPartModal } from '../AddPartModal/AddPartModel';
 
 interface SQLTableProps {
-    selectedTable: string
+    selectedTable: string;
+    fetchUpdate: boolean;
+    setFetchUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function parseTableData(tableName:string, rawTableData:Record<string, any>[]):TableData{
@@ -39,17 +41,18 @@ function getTableColumns(rawTableData:Record<string, any>[]):string[]{
 }
 
 
-export function SQLTable({ selectedTable }:SQLTableProps) {
+export function SQLTable({ selectedTable, fetchUpdate, setFetchUpdate }:SQLTableProps) {
     const {socket, isConnected} = useSocket();
     const [tableData, setTableData] = useState<TableData>();
     const [tableColumns, setTableColumns] = useState<string[]>([""]);
-    const [fetchUpdate, setFetchUpdate] = useState<boolean>(true);
     const [suggestedPartID, setSuggestedPartID] = useState<number>(0);
 
     const [opened, { open, close }] = useDisclosure(false);
 
     useEffect(() => {
         if (isConnected && selectedTable.length !== 0 && fetchUpdate == true){
+            console.log("Emitting for table: ", selectedTable);
+            
             socket.emit("getTableData", selectedTable, (tableDataResponse: Record<string, any>[]) => {
                 // Work on returned data
                 const parsedTableData = parseTableData(selectedTable, tableDataResponse);

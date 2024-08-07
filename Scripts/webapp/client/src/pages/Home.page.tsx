@@ -8,7 +8,7 @@ import { SQLTables } from '@/components/SQLTables/SQLTables';
 export function HomePage() {
     const [opened, { toggle }] = useDisclosure();
     const [selectedTable, setSelectedTable] = useState<string>("");
-    // let selectedTable:string = ""; // Why doesn't this work?
+    const [fetchUpdate, setFetchUpdate] = useState<boolean>(true);
 
 
     const handleTableSelect = (tableName: string) => {
@@ -30,10 +30,10 @@ export function HomePage() {
           <Title>ClementsComponents</Title>
         </AppShell.Header>
         <AppShell.Navbar p="md">
-          <SQLTables onTableSelect={handleTableSelect}></SQLTables>
+          <SQLTables onTableSelect={handleTableSelect} setFetchUpdate={setFetchUpdate}></SQLTables>
         </AppShell.Navbar>
         <AppShell.Main>
-            <SQLTable selectedTable={selectedTable}></SQLTable>
+            <SQLTable selectedTable={selectedTable} fetchUpdate={fetchUpdate} setFetchUpdate={setFetchUpdate}></SQLTable>
         </AppShell.Main>
         {/* <AppShell.Aside p="md">Aside</AppShell.Aside>
         <AppShell.Footer p="md">Footer</AppShell.Footer> */}

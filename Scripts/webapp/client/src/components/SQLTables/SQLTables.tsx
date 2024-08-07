@@ -4,9 +4,10 @@ import { useSocket } from "@/contexts/SocketContext";
 
 interface SQLTablesProps {
     onTableSelect: (tableName: string) => void;
+    setFetchUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function SQLTables({ onTableSelect }:SQLTablesProps){
+export function SQLTables({ onTableSelect, setFetchUpdate }:SQLTablesProps){
     const {socket, isConnected} = useSocket(); // Reference socket provider for socket.io
     const [tables, setTables] = useState<string[]>([]);
 
@@ -25,7 +26,10 @@ export function SQLTables({ onTableSelect }:SQLTablesProps){
             <Table highlightOnHover>
                 <Table.Tbody>
                     {tables.map((tableName) => (
-                        <Table.Tr key={tableName} onClick={() => onTableSelect(tableName)}>
+                        <Table.Tr key={tableName} onClick={() => {
+                                onTableSelect(tableName);
+                                setFetchUpdate(true);
+                                }}>
                             <Table.Td>{tableName}</Table.Td>
                         </Table.Tr>
                     ))}
