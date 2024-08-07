@@ -44,6 +44,7 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
     const [tableData, setTableData] = useState<TableData>();
     const [tableColumns, setTableColumns] = useState<string[]>([""]);
     const [fetchUpdate, setFetchUpdate] = useState<boolean>(true);
+    const [suggestedPartID, setSuggestedPartID] = useState<number>(0);
 
     const [opened, { open, close }] = useDisclosure(false);
 
@@ -52,6 +53,8 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
             socket.emit("getTableData", selectedTable, (tableDataResponse: Record<string, any>[]) => {
                 // Work on returned data
                 const parsedTableData = parseTableData(selectedTable, tableDataResponse);
+                setSuggestedPartID(tableDataResponse.length + 1);
+
                 setTableColumns(getTableColumns(tableDataResponse));
                 setTableData(parsedTableData);
                 setFetchUpdate(false);
@@ -83,7 +86,7 @@ export function SQLTable({ selectedTable }:SQLTableProps) {
                 modalState={opened} 
                 modalClose={close}
                 modalFields={tableColumns}
-                partIndex={69}
+                partIndex={suggestedPartID}
                 setFetchUpdate={setFetchUpdate}
                 />
         </>

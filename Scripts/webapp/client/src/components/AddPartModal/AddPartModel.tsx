@@ -46,7 +46,12 @@ export function AddPartModal( {tableName, modalState, modalClose, modalFields, p
     useEffect(() => {
         if (modalFields.length > 0 && fieldsSetup == false){
             const initialFieldValues = modalFields.reduce((acc, field) => {
-                acc[field] = "";
+                if (field === "id") {
+                    acc[field] = partIndex.toString(); // Set ID to the recommended field since it won't get updated properly later since we can't type into it
+                } else {
+                    acc[field] = "";
+                };
+                
                 return acc;
             }, {} as Record<string, string>);
 

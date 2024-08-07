@@ -144,12 +144,11 @@ sio.on('connection', (socket) => {
   });
 
   socket.on('insertRow', async ({tableName, rowData}, callback) => {
-      const newRowData = {...rowData, "id":4}
       console.log(`Inserting row into ${tableName}`);
       console.log("Row Data: ", rowData);
-      console.log("New Row Data: ", newRowData);
+      console.log("New Row Data: ", rowData);
 
-      const rowID = await insertRow(tableName, newRowData);
+      const rowID = await insertRow(tableName, rowData);
 
       callback(rowID);
   })
