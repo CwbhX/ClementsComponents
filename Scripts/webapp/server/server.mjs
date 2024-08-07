@@ -148,7 +148,9 @@ sio.on('connection', (socket) => {
       console.log("Row Data: ", rowData);
       console.log("New Row Data: ", rowData);
 
-      const rowID = await insertRow(tableName, rowData);
+      let rowID = await insertRow(tableName, rowData);
+
+      if (rowID == false) rowID = -1; // Let client know we failed
 
       callback(rowID);
   })

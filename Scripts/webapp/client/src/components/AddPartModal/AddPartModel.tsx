@@ -76,7 +76,7 @@ export function AddPartModal( {tableName, modalState, modalClose, modalFields, p
         if (isConnected){
             socket.emit('insertRow', {tableName:tableName, rowData:inputValues}, (affectedRow:number) => {
                 console.log("Successful added row: ", affectedRow);
-                if(affectedRow != null){
+                if(affectedRow != -1){
                     modalClose();
                     setFetchUpdate(true);
                 }
