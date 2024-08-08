@@ -51,6 +51,26 @@ export class Database {
         }    
     }
 
+    async getTableInfo(tableName){
+        const sanitizedTableName = mysql.escapeId(tableName);
+        const query = `SHOW COLUMNS FROM ${sanitizedTableName}`;
+
+        try {
+            const columns = await this.query(query);
+            return columns.map(column => ({
+                field: column.Field,
+                type: column.Type,
+                isNull: column.Null === 'YES',
+                key: column.key,
+                defaultValue: column.Default,
+                extra: column.Extra
+            }));
+        } catch (error) {
+            console.error(`Failed to fetch table info for ${tableName}:`, error);
+            return false;
+        }
+    }
+
     async getRowData(tableName, index){
         if (index < 1) {
             index = 1;
