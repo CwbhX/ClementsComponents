@@ -143,6 +143,13 @@ sio.on('connection', (socket) => {
       callback(tableData);
   });
 
+  socket.on('getTableInfo', async (tableName, callback) => {
+      console.log(`Request for info from ${tableName}`);
+      const tableInfo = await db.getTableInfo(tableName);
+
+      callback(tableInfo);
+  });
+
   socket.on('insertRow', async ({tableName, rowData}, callback) => {
       console.log(`Inserting row into ${tableName}`);
       console.log("Row Data: ", rowData);

@@ -10,6 +10,7 @@ interface SQLTableProps {
     setFetchUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+
 function parseTableData(tableName:string, rawTableData:Record<string, any>[]):TableData{
     let parsedTableData:TableData = {
         caption: tableName,
@@ -44,6 +45,7 @@ function getTableColumns(rawTableData:Record<string, any>[]):string[]{
 export function SQLTable({ selectedTable, fetchUpdate, setFetchUpdate }:SQLTableProps) {
     const {socket, isConnected} = useSocket();
     const [tableData, setTableData] = useState<TableData>();
+    const [tableInfo, setTableInfo] = useState<Record<string, string>[]>([]);
     const [tableColumns, setTableColumns] = useState<string[]>([""]);
     const [suggestedPartID, setSuggestedPartID] = useState<number>(0);
 
@@ -61,6 +63,11 @@ export function SQLTable({ selectedTable, fetchUpdate, setFetchUpdate }:SQLTable
                 setTableColumns(getTableColumns(tableDataResponse));
                 setTableData(parsedTableData);
                 setFetchUpdate(false);
+            });
+
+            socket.emit('getTableInfo', selectedTable, (tableInfoResponse: Record<string, string>[]) => {
+                console.log(tableInfoResponse);
+                
             });
         }
     
