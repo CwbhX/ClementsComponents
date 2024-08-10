@@ -3,6 +3,7 @@ import { Table, TableData, Button, Modal, Divider, Title, Group, Switch } from '
 import { useDisclosure } from '@mantine/hooks';
 import { useSocket } from '../../contexts/SocketContext';
 import { AddPartModal } from '../AddPartModal/AddPartModel';
+import { timeStamp } from 'console';
 
 interface SQLTableProps {
     selectedTable: string;
@@ -10,8 +11,25 @@ interface SQLTableProps {
     setFetchUpdate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+type TableInfo = {
+    field: string;
+    type: string;
+    isNull: boolean;
+    defaultValue: null | string;
+    extra: string
+};
 
-function parseTableData(tableName:string, rawTableData:Record<string, any>[]):TableData{
+function isNullOrEmpty(value:any) {
+    return (
+        value === undefined ||
+        value === null ||
+        value === '' ||
+        (Array.isArray(value) && value.length === 0) ||
+        (typeof value === 'object' && value !== null && Object.keys(value).length === 0)
+    );
+}
+
+function parseTableData(existingTableData:TableData | undefined, tableName:string, rawTableData:Record<string, any>[]):TableData{
     let parsedTableData:TableData = {
         caption: tableName,
         head: [],
@@ -23,7 +41,12 @@ function parseTableData(tableName:string, rawTableData:Record<string, any>[]):Ta
         const tableColumns = Object.keys(firstRow); // Is this right? could I call firstrow.keys?
         console.log("Table Columns", tableColumns);
 
-        parsedTableData.head = tableColumns;
+        if (existingTableData === undefined){
+            parsedTableData.head = tableColumns;
+        } else {
+            parsedTableData.head = existingTableData.head;
+        }
+        
         parsedTableData.body = rawTableData.map(Object.values);
     }
 
@@ -45,7 +68,7 @@ function getTableColumns(rawTableData:Record<string, any>[]):string[]{
 export function SQLTable({ selectedTable, fetchUpdate, setFetchUpdate }:SQLTableProps) {
     const {socket, isConnected} = useSocket();
     const [tableData, setTableData] = useState<TableData>();
-    const [tableInfo, setTableInfo] = useState<Record<string, string>[]>([]);
+    const [tableInfo, setTableInfo] = useState<TableInfo[]>([]);
     const [tableColumns, setTableColumns] = useState<string[]>([""]);
     const [suggestedPartID, setSuggestedPartID] = useState<number>(0);
 
@@ -57,7 +80,7 @@ export function SQLTable({ selectedTable, fetchUpdate, setFetchUpdate }:SQLTable
             
             socket.emit("getTableData", selectedTable, (tableDataResponse: Record<string, any>[]) => {
                 // Work on returned data
-                const parsedTableData = parseTableData(selectedTable, tableDataResponse);
+                const parsedTableData = parseTableData(tableData, selectedTable, tableDataResponse);
                 setSuggestedPartID(tableDataResponse.length + 1);
 
                 setTableColumns(getTableColumns(tableDataResponse));
@@ -65,9 +88,33 @@ export function SQLTable({ selectedTable, fetchUpdate, setFetchUpdate }:SQLTable
                 setFetchUpdate(false);
             });
 
-            socket.emit('getTableInfo', selectedTable, (tableInfoResponse: Record<string, string>[]) => {
-                console.log(tableInfoResponse);
-                
+            socket.emit('getTableInfo', selectedTable, (tableInfoResponse: TableInfo[]) => {
+                setTableInfo(tableInfoResponse);
+
+                if(tableData === undefined || isNullOrEmpty(tableData.head)){
+                    setTableData(prevTableData => {
+
+                        const columns = tableInfoResponse.reduce((acc:string[], currentValue:TableInfo) => {
+                            acc.push(currentValue.field);
+                            return acc;
+                        }, []);
+
+                        if (prevTableData === undefined){
+                            const tempTableData:TableData = {
+                                caption: selectedTable,
+                                head: columns,
+                                body: [[]]
+                            }
+
+                            return tempTableData;
+                        } else {
+                            return({
+                                ...prevTableData,
+                                head: columns
+                            })
+                        }
+                    });
+                }
             });
         }
     
