@@ -42,8 +42,11 @@ function parseTableData(existingTableData:TableData | undefined, tableName:strin
         console.log("Table Columns", tableColumns);
 
         if (existingTableData === undefined){
+            console.log("Table Data was undefined, setting to: ", tableColumns);
+            
             parsedTableData.head = tableColumns;
         } else {
+            console.log("Table Data already existed, setting to: ", existingTableData.head);
             parsedTableData.head = existingTableData.head;
         }
         
@@ -87,38 +90,48 @@ export function SQLTable({ selectedTable, fetchUpdate, setFetchUpdate }:SQLTable
                 setTableData(parsedTableData);
                 setFetchUpdate(false);
             });
-
-            socket.emit('getTableInfo', selectedTable, (tableInfoResponse: TableInfo[]) => {
-                setTableInfo(tableInfoResponse);
-
-                if(tableData === undefined || isNullOrEmpty(tableData.head)){
-                    setTableData(prevTableData => {
-
-                        const columns = tableInfoResponse.reduce((acc:string[], currentValue:TableInfo) => {
-                            acc.push(currentValue.field);
-                            return acc;
-                        }, []);
-
-                        if (prevTableData === undefined){
-                            const tempTableData:TableData = {
-                                caption: selectedTable,
-                                head: columns,
-                                body: [[]]
-                            }
-
-                            return tempTableData;
-                        } else {
-                            return({
-                                ...prevTableData,
-                                head: columns
-                            })
-                        }
-                    });
-                }
-            });
         }
     
     }, [selectedTable, fetchUpdate]);
+
+    useEffect(() => {
+        socket.emit('getTableInfo', selectedTable, (tableInfoResponse: TableInfo[]) => {
+            setTableInfo(tableInfoResponse);
+            const noTableData = tableData === undefined;
+
+            if(noTableData || isNullOrEmpty(tableData.head)){
+                setTableData(prevTableData => {
+                    console.log("Previous Table Data is: ", prevTableData);
+                    console.log("Current selected Table is: ", selectedTable);
+                    
+                    
+                    const columns = tableInfoResponse.reduce((acc:string[], currentValue:TableInfo) => {
+                        acc.push(currentValue.field);
+                        return acc;
+                    }, []);
+
+                    if (noTableData === undefined){
+                        console.log("No table data yet. Will add: ", columns);
+                        
+                        const tempTableData:TableData = {
+                            caption: selectedTable,
+                            head: columns,
+                            body: [[]]
+                        }
+
+                        return tempTableData;
+                    } else {
+                        console.log("Previous data: ", prevTableData);
+                        
+                        return({
+                            ...prevTableData,
+                            head: columns
+                        })
+                    }
+                });
+            }
+        });
+    }, [selectedTable]);
     
 
     return (
