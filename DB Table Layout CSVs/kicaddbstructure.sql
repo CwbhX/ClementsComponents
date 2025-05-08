@@ -91,7 +91,7 @@ CREATE TABLE connectors (
 
 CREATE TABLE resistors (
   part_id         INT UNSIGNED PRIMARY KEY,
-  resistance      DECIMAL(12,3) NOT NULL,
+  resistance      VARCHAR(32) NOT NULL,
   tolerance       DECIMAL(5,2),
   power           DECIMAL(5,2),
   temp_co_ppm     DECIMAL(7,3),
@@ -133,7 +133,7 @@ CREATE TABLE diodes (
 
 CREATE TABLE op_amps (
   part_id               INT UNSIGNED PRIMARY KEY,
-  function              VARCHAR(64),
+  `function`            VARCHAR(64),
   channel_count         INT,
   gain                  VARCHAR(64),
   bandwidth             VARCHAR(64),
@@ -200,7 +200,7 @@ CREATE TABLE igbts (
 
 CREATE TABLE analog_ics (
   part_id             INT UNSIGNED PRIMARY KEY,
-  function            VARCHAR(64),
+  `function`          VARCHAR(64),
   channel_count       INT,
   gain                VARCHAR(64),
   bandwidth           VARCHAR(32),
@@ -213,7 +213,7 @@ CREATE TABLE analog_ics (
 
 CREATE TABLE sensor_ics (
   part_id           INT UNSIGNED PRIMARY KEY,
-  function          VARCHAR(64),
+  `function`        VARCHAR(64),
   channel_count     INT,
   sensor_type       VARCHAR(64),
   gain              VARCHAR(64),
@@ -240,7 +240,7 @@ CREATE TABLE sensors (
 
 CREATE TABLE digital_ics (
   part_id            INT UNSIGNED PRIMARY KEY,
-  function           VARCHAR(64),
+  `function`         VARCHAR(64),
   logic_family       VARCHAR(64),
   operating_current  VARCHAR(32),
   pin_count          INT,
@@ -249,7 +249,7 @@ CREATE TABLE digital_ics (
 
 CREATE TABLE pmics (
   part_id           INT UNSIGNED PRIMARY KEY,
-  function          VARCHAR(64),
+  `function`        VARCHAR(64),
   channel_count     INT,
   frequency         VARCHAR(32),
   vout_min          DECIMAL(8,3),
@@ -261,7 +261,7 @@ CREATE TABLE pmics (
 
 CREATE TABLE power_drivers (
   part_id           INT UNSIGNED PRIMARY KEY,
-  function          VARCHAR(64),
+  `function`        VARCHAR(64),
   channel_count     INT,
   frequency         VARCHAR(32),
   vout_min          DECIMAL(8,3),
@@ -301,8 +301,8 @@ CREATE TABLE mcus (
   architecture       VARCHAR(64),
   frequency          VARCHAR(32),
   peripherals        VARCHAR(128),
-  ram_bytes          INT,
-  rom_bytes          INT,
+  ram_bytes          VARCHAR(32),
+  rom_bytes          VARCHAR(32),
   operating_current  VARCHAR(32),
   pin_count          INT,
   FOREIGN KEY (part_id) REFERENCES parts(id)
